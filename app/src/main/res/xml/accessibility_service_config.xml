@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Configuration du service d'accessibilité.
+
+    packageNames : le service ne reçoit QUE les événements d'Instagram.
+        C'est le premier filtre, appliqué par Android lui-même, donc gratuit
+        en batterie : notre code n'est jamais réveillé par les autres apps.
+
+    accessibilityEventTypes : les seuls types d'événements qui nous intéressent.
+        - typeWindowStateChanged   : un nouvel écran / panneau s'ouvre
+        - typeWindowContentChanged : le contenu d'un écran change
+        - typeViewScrolled         : une liste a défilé (filet de sécurité)
+        - typeViewClicked          : un élément a été cliqué (onglet Reels)
+
+    accessibilityFeedbackType : "generic" = on ne fournit ni voix ni vibration.
+
+    notificationTimeout : Android regroupe les événements du même type et ne
+        nous en envoie au plus qu'un toutes les 100 ms. Économise la batterie.
+
+    canRetrieveWindowContent : autorise la lecture de l'arbre des éléments
+        affichés (boutons, textes…). Indispensable pour reconnaître les écrans.
+
+    canPerformGestures : autorise dispatchGesture(), utilisé par l'overlay
+        pour rejouer tes taps vers Instagram.
+
+    accessibilityFlags :
+        - flagReportViewIds : donne les identifiants techniques des éléments
+          (ex. "com.instagram.android:id/clips_tab").
+        - flagRetrieveInteractiveWindows : permet de voir toutes les fenêtres
+          (utile pour détecter le panneau des commentaires).
+
+    description : texte affiché par Android dans les paramètres d'accessibilité.
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeViewScrolled|typeViewClicked"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagReportViewIds|flagRetrieveInteractiveWindows"
+    android:canPerformGestures="true"
+    android:canRetrieveWindowContent="true"
+    android:description="@string/accessibility_service_description"
+    android:notificationTimeout="100"
+    android:packageNames="com.instagram.android" />

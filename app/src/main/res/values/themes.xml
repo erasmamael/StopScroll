@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Thème de base de la fenêtre ; l'apparence réelle est gérée par Compose (Material 3). -->
+    <style name="Theme.StopScroll" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

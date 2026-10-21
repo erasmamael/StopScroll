@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Seul le dossier des exports d'arbre (filesDir/dumps) peut être partagé. -->
+<paths>
+    <files-path name="dumps" path="dumps/" />
+</paths>

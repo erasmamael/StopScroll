@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Manifeste "debug" : Gradle le FUSIONNE avec le manifeste principal, mais
+    uniquement pour la version debug. Ce qui est déclaré ici n'existe pas
+    dans la version finale (release).
+
+    FileProvider : permet de partager les exports d'arbre (fichiers privés
+    de l'app) via le menu de partage Android.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.debugfiles"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/debug_file_paths" />
+        </provider>
+    </application>
+</manifest>

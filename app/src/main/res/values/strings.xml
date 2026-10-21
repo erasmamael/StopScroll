@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">StopScroll</string>
+
+    <!-- Nom du service tel qu'il apparaît dans Paramètres > Accessibilité. -->
+    <string name="accessibility_service_label">StopScroll – blocage des Reels</string>
+
+    <!-- Message affiché quand on tente d'ouvrir l'onglet Reels. -->
+    <string name="toast_reels_tab_blocked">Onglet Reels bloqué par StopScroll</string>
+
+    <!-- Texte affiché par Android quand on ouvre le service dans les paramètres. -->
+    <string name="accessibility_service_description">Bloque l\'onglet Reels d\'Instagram et empêche de passer d\'un Reel à l\'autre. Le service lit uniquement l\'écran d\'Instagram, localement. Aucune donnée ne quitte le téléphone : l\'app n\'a pas accès à Internet.</string>
+</resources>

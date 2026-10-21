@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    AndroidManifest.xml : la "carte d'identité" de l'application.
+    Android le lit à l'installation pour savoir :
+      - quels écrans (activities) et services l'app contient ;
+      - quelles permissions elle demande.
+
+    CONFIDENTIALITÉ : remarque qu'il n'y a AUCUNE ligne
+    <uses-permission android:name="android.permission.INTERNET" />.
+    Sans elle, Android interdit physiquement à l'app d'accéder au réseau.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        Depuis Android 11, une app ne "voit" pas les autres apps installées
+        sauf si elle les déclare ici. On déclare Instagram pour pouvoir
+        vérifier qu'il est installé et l'ouvrir depuis notre app.
+    -->
+    <queries>
+        <package android:name="com.instagram.android" />
+    </queries>
+
+    <!--
+        allowBackup="false" : nos réglages ne sont pas envoyés dans la
+        sauvegarde cloud Google. Rien ne quitte le téléphone.
+    -->
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.StopScroll">
+
+        <!-- L'écran principal de l'app (celui qui s'ouvre depuis l'icône). -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            Le service d'accessibilité.
+            - permission BIND_ACCESSIBILITY_SERVICE : garantit que SEUL le
+              système Android peut se connecter à ce service (aucune autre
+              app ne peut le piloter).
+            - exported="true" : obligatoire pour que le système puisse s'y lier.
+            - l'intent-filter dit à Android "je suis un service d'accessibilité",
+              ce qui le fait apparaître dans Paramètres > Accessibilité.
+            - la balise meta-data pointe vers sa configuration détaillée.
+        -->
+        <service
+            android:name=".service.StopScrollService"
+            android:exported="true"
+            android:label="@string/accessibility_service_label"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+    </application>
+
+</manifest>
